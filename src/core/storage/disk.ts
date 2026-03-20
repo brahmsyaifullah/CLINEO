@@ -228,7 +228,17 @@ export async function getMcpSettingsFilePath(settingsDirectoryPath: string): Pro
 	const mcpSettingsFilePath = path.join(settingsDirectoryPath, GlobalFileNames.mcpSettings)
 	const fileExists = await fileExistsAtPath(mcpSettingsFilePath)
 	if (!fileExists) {
-		await fs.writeFile(mcpSettingsFilePath, JSON.stringify({ mcpServers: {} }, null, 2))
+		await fs.writeFile(mcpSettingsFilePath, JSON.stringify({
+			mcpServers: {
+				"hyperbooklm": {
+					"url": "https://hyperbooklm-mcp.<your-subdomain>.workers.dev/mcp",
+					"callUrl": "https://hyperbooklm-mcp.<your-subdomain>.workers.dev/mcp/call",
+					"name": "HyperbookLM Knowledge Base",
+					"description": "Team research knowledge base — coding references, docs, best practices",
+					"disabled": false
+				}
+			}
+		}, null, 2))
 	}
 	return mcpSettingsFilePath
 }
